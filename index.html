@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gamez</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="content">
+        <div class="logo">
+          <a href="#">Gamez</a>
+        </div>
+        <ul class="menu-list">
+          <div class="icon cancel-btn">
+            <i class="fas fa-times"></i>
+          </div>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#Games">Games</a></li>
+          <li><a href="#tournament">Tournament</a></li>
+          <li><a href="#hardware">Hardware</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="navbar-right">
+          <div class="cart-icon" onclick="toggleCart()">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+          </div>
+          <div class="icon menu-btn">
+            <i class="fas fa-bars"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div id="cartModal" class="cart-modal">
+      <div class="cart-modal-content">
+        <div class="cart-modal-header">
+          <h2>Your Cart</h2>
+          <span class="close-cart" onclick="toggleCart()">&times;</span>
+        </div>
+        <div class="success-message" id="successMessage"></div>
+        <div class="cart-items" id="cartItems">
+          <div class="empty-cart">
+            <i class="fas fa-shopping-cart"></i>
+            <p>Your cart is empty</p>
+          </div>
+        </div>
+        <div class="cart-total" id="cartTotal" style="display: none;">
+          <h3>Total: $<span id="totalPrice">0.00</span></h3>
+          <button class="checkout-btn" onclick="checkout()">
+            Proceed to Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section id="home">
+      <div class="home-page">
+        <div id="typewriter"></div>
+      </div>
+    </section>
+
+    <section id="Games">
+      <h2 style="font-size: 40px;padding-left: 40%;">Games Of The Week</h2>
+      <div class="service-container">
+        <div class="service">
+          <div class="service-icon">
+            <img
+              src="images/Mortal Kombat 9 gameing Poster 61x91_5cm Large size NEW.jpeg"
+              alt="Mortal Kombat Icon"
+            />
+          </div>
+          <h3>Mortal Kombat</h3>
+          <h4>59.99</h4>
+          <div class="star-container">
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+          </div>
+          <button
+            class="add-to-cart-btn"
+            onclick="addToCart('Mortal Kombat', 59.99, 'images/Mortal Kombat 9 gameing Poster 61x91_5cm Large size NEW.jpeg')"
+          >
+            <i class="fas fa-shopping-cart"></i> Add to cart
+          </button>
+        </div>
+
+        <div class="service">
+          <div class="service-icon">
+            <img
+              src="images/EA SPORTS FC 24 Ultimate - Jetzt hier vorbestellen! (Empfohlen).jpeg"
+              alt="EA FC 24 Icon"
+            />
+          </div>
+          <h3>EA FC 24</h3>
+          <h4>69.99</h4>
+          <div class="star-container">
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+          </div>
+          <button
+            class="add-to-cart-btn"
+            onclick="addToCart('EA FC 24', 69.99, 'images/EA SPORTS FC 24 Ultimate - Jetzt hier vorbestellen! (Empfohlen).jpeg')"
+          >
+            <i class="fas fa-shopping-cart"></i> Add to cart
+          </button>
+        </div>
+
+        <div class="service">
+          <div class="service-icon">
+            <img
+              src="images/Resident Evil 4 (2023).jpeg"
+              alt="Resident Evil Icon"
+            />
+          </div>
+          <h3>Resident Evil 4</h3>
+          <h4>49.99</h4>
+          <div class="star-container">
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+          </div>
+          <button
+            class="add-to-cart-btn"
+            onclick="addToCart('Resident Evil 4', 49.99, 'images/Resident Evil 4 (2023).jpeg')"
+          >
+            <i class="fas fa-shopping-cart"></i> Add to cart
+          </button>
+        </div>
+
+        <div class="service">
+          <div class="service-icon">
+            <img
+              src="images/Call of Duty_ Ghosts PC box art.jpeg"
+              alt="Call of Duty Icon"
+            />
+          </div>
+          <h3>Call of Duty</h3>
+          <h4>79.99</h4>
+          <div class="star-container">
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+          </div>
+          <button
+            class="add-to-cart-btn"
+            onclick="addToCart('Call of Duty', 79.99, 'images/Call of Duty_ Ghosts PC box art.jpeg')"
+          >
+            <i class="fas fa-shopping-cart"></i> Add to cart
+          </button>
+        </div>
+
+        <div class="service">
+          <div class="service-icon">
+            <img src="images/Sonic the Hedgehog.jpeg" alt="Sonic Icon" />
+          </div>
+          <h3>Sonic Adventures</h3>
+          <h4> 39.99</h4>
+          <div class="star-container">
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+            <h4 class="star">&#11088;</h4>
+          </div>
+          <button
+            class="add-to-cart-btn"
+            onclick="addToCart('Sonic Adventures', 39.99, 'images/Sonic the Hedgehog.jpeg')"
+          >
+            <i class="fas fa-shopping-cart"></i> Add to cart
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-----tournament-->
+  <section id="tournament">
+        <div class="tournament-wrapper">
+            <h2>Tournament Time</h2>
+            <div class="tournament-container">
+                <div class="tournament">
+                    <div class="tournament-icon">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Gaming Tournament" />
+                    </div>
+                    <div class="tournament-content">
+                        <h3>
+                            So you're an awesome gamer<br/>
+                            Prove it!<br/>
+                            Join the biggest gaming tournament in the country and show your skills
+                        </h3>
+                        <button class="tt-btn" onclick="openModal()">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="formContent">
+                <h3>Join the Tournament</h3>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Send</button>
+                </form>
+            </div>
+            <div id="thankYouContent" class="thank-you-message" style="display: none;">
+                <div class="checkmark"></div>
+                <h3>Thank You!</h3>
+                <p>Your information has been received. We'll contact you soon with tournament details!</p>
+            </div>
+        </div>
+    </div>
+
+ <section id="hardware">
+      <h2 style="font-size: 40px;padding-left: 50%;">Hardware</h2>
+      <div class="service-container">
+        <div class="service">
+          <div class="service-icon">
+            <img
+              src="images/PS5_Dualsense_Controller-removebg-preview.png"
+              alt="Game gear"
+            />
+          </div>
+          <h3>Spider PS5 Controller</h3>
+          <p>
+            Get the latest playstation 5 controller with an asthetic spiderman
+            design
+          </p>
+          <div class="hardware-price">$89.99</div>
+          <button
+            class="add-to-cart-btn"
+            onclick="addToCart('Spider PS5 Controller', 89.99, 'images/PS5_Dualsense_Controller-removebg-preview.png')"
+          >
+            <i class="fas fa-shopping-cart"></i> Add to cart
+          </button>
+
+        
+        </div>
+
+        <div class="service">
+          <div class="service-icon">
+            <img
+              src="images/Dragon-Themed_Gaming_Controller__Unleash_Your_Inner_Warrior-removebg-preview.png"
+              alt="dragon designIcon"
+            />
+          </div>
+          <h3>Dragon Built</h3>
+          <p class="short-description">Get the new dragon Ps5 controller</p>
+          <div class="hardware-price">$94.99</div>
+          <button
+            class="add-to-cart-btn"
+            onclick="addToCart('Dragon Built', 94.99, 'images/Dragon-Themed_Gaming_Controller__Unleash_Your_Inner_Warrior-removebg-preview.png')"
+          >
+            <i class="fas fa-shopping-cart"></i> Add to cart
+          </button>
+         
+        </div>
+
+        <div class="service">
+          <div class="service-icon">
+            <img
+              src="images/JOKER_PS5_DualSense_Edge_Custom_Modded_Wireless_Controller-removebg-preview.png"
+              alt="Motion Graphics Icon"
+            />
+          </div>
+          <h3>Why So Serious??</h3>
+          <p class="short-description">
+            Laugh your way to victory with the new joker gear
+          </p>
+          <div class="hardware-price">$99.99</div>
+          <button
+            class="add-to-cart-btn"
+            onclick="addToCart('Why So Serious??', 99.99, 'images/JOKER_PS5_DualSense_Edge_Custom_Modded_Wireless_Controller-removebg-preview.png')"
+          >
+            <i class="fas fa-shopping-cart"></i> Add to cart
+          </button>
+         
+        </div>
+
+        <div class="service">
+          <div class="service-icon">
+            <img
+              src="images/One_Piece__️-removebg-preview.png"
+              alt="Graphic Design Icon"
+            />
+          </div>
+          <h3>Straw Hat Holds</h3>
+          <p class="short-description">
+            Hunt down your treasures and find your way to the one piece
+          </p>
+          <div class="hardware-price">$92.99</div>
+          <button
+            class="add-to-cart-btn"
+            onclick="addToCart('Straw Hat Holds', 92.99, 'images/One_Piece__️-removebg-preview.png')"
+          >
+            <i class="fas fa-shopping-cart"></i> Add to cart
+          </button>
+      
+        </div>
+
+        <div class="service">
+          <div class="service-icon">
+            <img
+              src="images/LaZa_Modz_Custom_Controllers___Luxury_Custom_PS5_and_Xbox_Controllers-removebg-preview.png"
+              alt="Ad Campaigns Icon"
+            />
+          </div>
+          <h3>Grand Game Auto</h3>
+          <p class="short-description">Race to become the best</p>
+          <div class="hardware-price">$87.99</div>
+          <button
+            class="add-to-cart-btn"
+            onclick="addToCart('Grand Game Auto', 87.99, 'images/LaZa_Modz_Custom_Controllers___Luxury_Custom_PS5_and_Xbox_Controllers-removebg-preview.png')"
+          >
+            <i class="fas fa-shopping-cart"></i> Add to cart
+          </button>
+         
+        </div>
+      </div>
+    </section>
+
+    <!---------contacts-->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <div class="contact-container">
+        <form class="contact-form">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            required
+          ></textarea>
+          <button type="submit" class="cta-button">Send Message</button>
+        </form>
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-x"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>

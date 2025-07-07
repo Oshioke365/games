@@ -1,0 +1,980 @@
+
+/* General Body and Container Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #f4f4f4;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 20px;
+}
+
+/* Navigation Bar Styles */
+.navbar {
+  position: fixed;
+  width: 100%;
+  padding: 20px 0;
+  background: transparent;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.navbar.sticky {
+  padding: 10px 0;
+  background: #222;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.navbar .logo a {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.navbar .menu-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-list li {
+  margin-left: 25px;
+}
+
+.menu-list li a {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+
+.navbar .menu-list .cancel-btn {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  color: #007bff;
+  font-size: 25px;
+  cursor: pointer;
+  display: none;
+}
+
+.navbar .menu-btn {
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+  display: none;
+}
+
+/* Navbar right section for cart and menu button */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Adjust as needed */
+}
+
+/* Responsive Navbar */
+@media (max-width: 868px) {
+  .navbar .menu-btn {
+    display: block;
+  }
+
+  .navbar .menu-list {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    left: -100%;
+    top: 0;
+    display: block;
+    padding: 80px 0;
+    text-align: center;
+    background: #222;
+    transition: all 0.3s ease;
+  }
+
+  .navbar.show .menu-list {
+    left: 0;
+  }
+
+  .navbar .menu-list li {
+    margin-top: 45px;
+  }
+
+  .navbar .menu-list li a {
+    font-size: 23px;
+  }
+
+  .navbar .menu-list .cancel-btn {
+    display: block;
+  }
+
+  .body.disabled {
+    overflow: hidden;
+  }
+}
+/*cart*/
+/* Cart System Styles */
+.cart-icon {
+  position: relative;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff4444;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.cart-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cart-modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.cart-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #eee;
+}
+
+.cart-modal-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.close-cart {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-cart:hover {
+  color: #000;
+}
+
+.cart-items {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 15px;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-info h4 {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.cart-item-price {
+  color: #666;
+  font-weight: bold;
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-btn:hover {
+  background-color: #555;
+}
+
+.quantity-display {
+  min-width: 40px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.remove-item {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.remove-item:hover {
+  background-color: #cc0000;
+}
+
+.cart-total {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #eee;
+  text-align: right;
+}
+
+.cart-total h3 {
+  margin: 0;
+  color: #333;
+}
+
+.checkout-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.checkout-btn:hover {
+  background-color: #218838;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.empty-cart i {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.success-message {
+  display: none;
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #c3e6cb;
+}
+
+/* Updated home page styles */
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .home-page {
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    padding: 0 15px;
+  }
+
+  #typewriter {
+    line-height: 1.2;
+    word-break: break-word;
+    white-space: normal;
+  }
+
+  .cart-modal-content {
+    width: 95%;
+    margin: 10% auto;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-item img {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+  }
+
+  .cart-item-controls {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page {
+    font-size: clamp(1rem, 6vw, 1.5rem);
+    padding: 0 10px;
+  }
+
+  #typewriter {
+    min-height: 2.5rem;
+  }
+}
+/* Home Section */
+#home {
+  
+  text-align: center;
+}
+
+.home-page {
+  background-image: url("images/trial.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+#typewriter {
+  border-right: 2px solid white;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  animation: blink 0.5s step-end infinite alternate;
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+
+#home h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+#home p {
+  font-size: 1.2em;
+  color: #555;
+}
+
+.cta-button {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  background: #000;
+}
+
+/* Services Section */
+#services {
+  padding: 60px 0;
+  text-align: center;
+  background: #fff;
+}
+
+#services h2,
+#tournment h2,
+#contact h2 {
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.service-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+    padding: 0 20px; /* Add padding to prevent edge touching */
+  box-sizing: border-box;
+}
+
+.service {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  flex: 1 1 calc(33.333% - 60px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures content is spread out */
+  align-items: center;
+  text-align: center;
+  min-width: 280px; 
+  max-width: 350px;
+  
+}
+
+.service:hover {
+  transform: translateY(-10px);
+}
+
+.service-icon img {
+  width: 100%;
+  height: 200px; /* Fixed height for consistency */
+  object-fit: cover; /* Ensures image covers the area without distortion */
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.service h3 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.service p {
+  font-size: 1em;
+  color: #666;
+  flex-grow: 1; /* Allows paragraph to take available space */
+}
+
+.star-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  color: gold;
+}
+
+.add-to-cart-btn {
+  background-color: #000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Tournment Section */
+   
+  
+        #tournament {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #tournament::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .tournament-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        #tournament h2 {
+            font-size: 4rem;
+            margin-bottom: 60px;
+            color: #fff;
+            text-align: center;
+            font-weight: 900;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .tournament-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .tournament {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 900px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .tournament:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .tournament-icon {
+            flex: 0 0 300px;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-right: 40px;
+        }
+
+        .tournament-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .tournament:hover .tournament-icon img {
+            transform: scale(1.1);
+        }
+
+        .tournament-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .tournament h3 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .tournament h3 br {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .tt-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            padding: 18px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tt-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .tt-btn:hover::before {
+            left: 100%;
+        }
+
+        .tt-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+        }
+
+        .tt-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8) translateY(50px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .modal h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .thank-you-message {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .thank-you-message h3 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        .thank-you-message p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #4CAF50;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: checkmarkPulse 0.6s ease-out;
+        }
+
+        .checkmark::after {
+            content: '✓';
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes checkmarkPulse {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #tournament {
+                padding: 40px 0;
+            }
+
+            #tournament h2 {
+                font-size: 2.5rem;
+                margin-bottom: 40px;
+            }
+
+            .tournament {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+
+            .tournament-icon {
+                flex: none;
+                width: 100%;
+                height: 200px;
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .tournament-content {
+                text-align: center;
+            }
+
+            .tournament h3 {
+                font-size: 1.8rem;
+            }
+
+            .modal {
+                padding: 30px 20px;
+            }
+        }
+
+
+/* Overlay for "Our Expertise" section */
+.service .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 8px;
+}
+
+.service:hover .overlay {
+  opacity: 1;
+}
+
+.overlay-content h3 {
+  font-size: 2em;
+  margin: 0;
+}
+
+/* Contact Section */
+#contact {
+  padding: 60px 0;
+  text-align: center;
+  background: #eee;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  gap: 15px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.social-icon {
+  color: #333;
+  font-size: 2em;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #007bff;
+}
+
+/* Footer (optional, but good practice) */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  background: #333;
+  color: #fff;
+  font-size: 0.9em;
+}
